@@ -8,6 +8,7 @@ function App() {
   // LISTVIEW: for listing existing recipies,
   // DETAILSVIEW: for selected recipie,
   const [view, setView] = useState("LISTVIEW");
+
   return (
     <div className="App">
       <RecipeHeader />

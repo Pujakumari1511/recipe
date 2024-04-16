@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
 
-export const AccordionItem = ({ item, setView, setRecipeId }) => {
-  const [isOpen, setIsOpen] = useState(false);
+export const AccordionItem = ({
+  item,
+  setView,
+  setRecipeId,
+  isOpen,
+  toggleAccordion,
+}) => {
+  /* const [isOpen, setIsOpen] = useState(false);
 
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
-  };
+  }; */
 
   const moreDetails = (recipeId) => {
     setView("DETAILSVIEW");
