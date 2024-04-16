@@ -67,36 +67,43 @@ export const AddNewRecipe = ({ setView }) => {
             required={true}
           />
         </div>
-        <div class="form-floating mb-3">
-          <textarea
-            class="form-control"
-            placeholder=""
-            id="ingredients"
-            value={newRecipeData.ingredients}
-            onChange={handleChange}
-            required={true}
-          ></textarea>
-          <label for="ingredients">Ingredients</label>
+        <div class="row align-items-start">
+          <div class="col">
+            <div class="form-floating mb-3">
+              <textarea
+                class="form-control"
+                placeholder=""
+                id="ingredients"
+                style={{ height: 100 }}
+                value={newRecipeData.ingredients}
+                onChange={handleChange}
+                required={true}
+              ></textarea>
+              <label for="ingredients">Ingredients</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-floating mb-3 col">
+              <textarea
+                class="form-control"
+                placeholder=""
+                id="stepsToPrepare"
+                style={{ height: 100 }}
+                value={newRecipeData.stepsToPrepare}
+                onChange={handleChange}
+                required={true}
+              ></textarea>
+              <label for="stepsToPrepare">Steps To Prepare</label>
+            </div>
+          </div>
         </div>
-        <div class="form-floating mb-3">
-          <textarea
-            class="form-control"
-            placeholder=""
-            id="stepsToPrepare"
-            style={{ height: 100 }}
-            value={newRecipeData.stepsToPrepare}
-            onChange={handleChange}
-            required={true}
-          ></textarea>
-          <label for="stepsToPrepare">Steps To Prepare</label>
-        </div>
-        <div class="row justify-content-evenly">
-          <div class="col-6">
+        <div class="row justify-content-between">
+          <div class="col">
             <button type="submit" value="submit" class="btn btn-primary">
               Add
             </button>
           </div>
-          <div class="col-6">
+          <div class="col">
             <button type="button" class="btn btn-primary" onClick={goBack}>
               Back
             </button>
