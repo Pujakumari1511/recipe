@@ -9,9 +9,13 @@ export const AddNewRecipe = ({ setView }) => {
     stepsToPrepare: "",
   });
 
+  // SUCCESS, FAILED, null
+  const [formSaved, setFormSaved] = useState(null);
+
   const handleChange = (event) => {
     const { id, value } = event.target;
     setNewRecipeData((prevState) => ({ ...prevState, [id]: value }));
+    setFormSaved(null);
   };
 
   const goBack = () => {
@@ -20,7 +24,33 @@ export const AddNewRecipe = ({ setView }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(newRecipeData);
+    const requestOption = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newRecipeData),
+    };
+    fetch("/newrecipe", requestOption)
+      .then((res) => {
+        if (res.ok) {
+          setFormSaved("SUCCESS");
+          setNewRecipeData({
+            title: "",
+            shortDescription: "",
+            timeToPrepare: 0,
+            ingredients: "",
+            stepsToPrepare: "",
+          });
+        } else {
+          setFormSaved("FAILED");
+          console.log(
+            `Failed adding recipe. status:${res.status} reason:${res.statusText}`
+          );
+        }
+      })
+      .catch((error) => {
+        setFormSaved("FAILED");
+        console.log(error);
+      });
   };
 
   return (
@@ -102,6 +132,17 @@ export const AddNewRecipe = ({ setView }) => {
             <button type="submit" value="submit" class="btn btn-primary">
               Add
             </button>
+            {formSaved && (
+              <span
+                className={`badge rounded-pill ${
+                  formSaved === "SUCCESS" ? "bg-success" : "bg-danger"
+                }`}
+              >
+                {formSaved === "SUCCESS"
+                  ? "Successfully saved recipe"
+                  : "Failed to save recipe"}
+              </span>
+            )}
           </div>
           <div class="col">
             <button type="button" class="btn btn-primary" onClick={goBack}>

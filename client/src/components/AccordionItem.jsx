@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 export const AccordionItem = ({
   item,
   setView,
@@ -7,12 +5,6 @@ export const AccordionItem = ({
   isOpen,
   toggleAccordion,
 }) => {
-  /* const [isOpen, setIsOpen] = useState(false);
-
-  const toggleAccordion = () => {
-    setIsOpen(!isOpen);
-  }; */
-
   const moreDetails = (recipeId) => {
     setView("DETAILSVIEW");
     setRecipeId(recipeId);
@@ -41,7 +33,7 @@ export const AccordionItem = ({
           <p>{item.shortDescription}</p>
           <button
             className="btn btn-light"
-            onClick={() => moreDetails(item.id)}
+            onClick={() => moreDetails(item._id)}
           >
             more details...
           </button>

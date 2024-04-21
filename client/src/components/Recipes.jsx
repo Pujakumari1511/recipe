@@ -7,7 +7,7 @@ export const Recipes = ({ setView, setRecipeId }) => {
   const [openedItem, setOpenedItem] = useState(0);
 
   const toggleAccordion = (index) => {
-    if (index == openedItem) {
+    if (index === openedItem) {
       setIsOpen(!isOpen);
     } else if (!isOpen) {
       setIsOpen(true);
@@ -19,7 +19,6 @@ export const Recipes = ({ setView, setRecipeId }) => {
     fetch("/recipes")
       .then((res) => res.json())
       .then((resJson) => {
-        console.log(resJson);
         if (resJson && resJson.length > 0) {
           setRecepies(resJson);
         } else {
@@ -46,7 +45,7 @@ export const Recipes = ({ setView, setRecipeId }) => {
               item={recipe}
               setView={setView}
               setRecipeId={setRecipeId}
-              isOpen={isOpen && index == openedItem}
+              isOpen={isOpen && index === openedItem}
               toggleAccordion={() => toggleAccordion(index)}
             />
           ))}
