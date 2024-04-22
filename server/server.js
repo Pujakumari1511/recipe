@@ -5,6 +5,8 @@ const {
   saveNewRecipe,
   findTheRecipe,
   getAllRecipes,
+  addLikeOrDislike,
+  addComments,
 } = require("./recipeSchema");
 
 const app = express();
@@ -42,6 +44,34 @@ app.get("/recipe/:id", (req, res) => {
     if (recipe) {
       // Recipe found, send data with status 200
       res.status(200).json(recipe);
+    } else {
+      // Recipe not found, send error with status 404
+      res.status(404).send("Recipe not found");
+    }
+  });
+});
+
+app.put("/recipe/:id/like", (req, res) => {
+  console.log("Request URL:", req.url);
+  const recipeId = req.params.id;
+  addLikeOrDislike(recipeId, req.body).then((updatedRecipe) => {
+    if (updatedRecipe) {
+      // Recipe found, send updated recipe with status 200
+      res.status(200).json(updatedRecipe);
+    } else {
+      // Recipe not found, send error with status 404
+      res.status(404).send("Recipe not found");
+    }
+  });
+});
+
+app.put("/recipe/:id/comment", (req, res) => {
+  console.log("Request URL:", req.url);
+  const recipeId = req.params.id;
+  addComments(recipeId, req.body).then((updatedRecipe) => {
+    if (updatedRecipe) {
+      // Recipe found, send recipe with status 200
+      res.status(200).json(updatedRecipe);
     } else {
       // Recipe not found, send error with status 404
       res.status(404).send("Recipe not found");

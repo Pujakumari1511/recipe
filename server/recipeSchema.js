@@ -40,8 +40,31 @@ function getAllRecipes() {
   return Recipe.aggregate(pipeline);
 }
 
+function addLikeOrDislike(recipeId, likeOrDislike) {
+  const deltaLike = {
+    likes: likeOrDislike.isLike ? 1 : 0,
+    dislikes: likeOrDislike.isLike ? 0 : 1,
+  };
+
+  return Recipe.findByIdAndUpdate(
+    recipeId,
+    { $inc: deltaLike },
+    { new: true } // Return the updated document
+  );
+}
+
+function addComments(recipeId, commentData) {
+  return Recipe.findByIdAndUpdate(
+    recipeId,
+    { $push: { comments: commentData.comment } },
+    { new: true } // Return the updated document
+  );
+}
+
 module.exports = {
   saveNewRecipe,
   findTheRecipe,
   getAllRecipes,
+  addLikeOrDislike,
+  addComments,
 };
